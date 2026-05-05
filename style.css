@@ -40,6 +40,16 @@ body {
   font-size: 0.95rem;
 }
 
+.menu-toggle {
+  margin-top: 1rem;
+  display: none;
+  border: 1px solid #334155;
+  background: #0b1220;
+  color: #fff;
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.75rem;
+}
+
 .hero {
   padding: 4rem 0;
 }
@@ -109,4 +119,34 @@ body {
   border-radius: 0.4rem;
   padding: 0.65rem 0.7rem;
   font: inherit;
+}
+
+.form-status {
+  min-height: 1.2rem;
+  font-size: 0.92rem;
+}
+
+.form-status.success {
+  color: #166534;
+}
+
+.form-status.error {
+  color: #b91c1c;
+}
+
+@media (max-width: 640px) {
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .top-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  .top-nav.open {
+    display: flex;
+  }
 }
