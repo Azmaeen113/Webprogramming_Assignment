@@ -27,6 +27,19 @@ body {
   color: #cbd5e1;
 }
 
+.top-nav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.top-nav a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
 .hero {
   padding: 4rem 0;
 }
@@ -53,4 +66,47 @@ body {
   border-top: 1px solid #e5e7eb;
   margin-top: 3rem;
   padding: 1rem 0;
+}
+
+.section {
+  padding: 3.5rem 0;
+}
+
+.section-muted {
+  background: #f3f4f6;
+}
+
+.section h2 {
+  margin-bottom: 1rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.contact-form {
+  max-width: 560px;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 0.4rem;
+  padding: 0.65rem 0.7rem;
+  font: inherit;
 }
