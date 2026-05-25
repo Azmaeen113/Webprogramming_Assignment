@@ -5,18 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Programming Lab Project</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Web Programming Lab Project</h1>
-      <p class="subtitle">Initial setup and base layout</p>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
-      <nav class="top-nav">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Web Programming Lab</h1>
+        <p class="subtitle">Semester assignment — Week 2 update</p>
+      </div>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark mode</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+      </div>
+      <nav class="top-nav" id="topNav">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
@@ -24,25 +33,38 @@
   <main>
     <section id="home" class="hero">
       <div class="container">
-        <h2>Welcome</h2>
-        <p>This project will be improved step by step during the semester.</p>
-        <a class="btn" href="#contact">Get in touch</a>
+        <span class="hero-badge">Phase 2</span>
+        <h2>Welcome to My Lab Portfolio</h2>
+        <p>
+          This project grows week by week. Phase 2 adds a project showcase,
+          improved layout, and stronger responsive design.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-outline" href="#contact">Contact Me</a>
+        </div>
       </div>
     </section>
 
     <section id="about" class="section">
       <div class="container">
-        <h2>About This Project</h2>
-        <p>
-          This assignment is a semester-long lab project where I will gradually add
-          web development concepts such as layout, responsive design, and JavaScript behavior.
+        <h2 class="section-title">About This Project</h2>
+        <p class="section-lead">
+          This assignment is a semester-long lab project where I gradually add
+          web development concepts: semantic HTML, CSS layout, responsive design,
+          and JavaScript interactivity.
         </p>
+        <ul class="about-list">
+          <li>Course: Web Programming Lab</li>
+          <li>Goal: Build a multi-section portfolio-style website</li>
+          <li>Approach: Small commits every few days</li>
+        </ul>
       </div>
     </section>
 
     <section id="features" class="section section-muted">
       <div class="container">
-        <h2>Current Features</h2>
+        <h2 class="section-title">Current Features</h2>
         <div class="feature-grid">
           <article class="card">
             <h3>Clean Structure</h3>
@@ -50,7 +72,7 @@
           </article>
           <article class="card">
             <h3>Multiple Sections</h3>
-            <p>Home, About, Features, and Contact areas for easy expansion.</p>
+            <p>Home, About, Features, Projects, and Contact for easy expansion.</p>
           </article>
           <article class="card">
             <h3>Incremental Approach</h3>
@@ -60,31 +82,70 @@
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section id="projects" class="section">
       <div class="container">
-        <h2>Contact</h2>
+        <h2 class="section-title">Lab Projects</h2>
+        <p class="section-lead">Sample work items added in Phase 2 to demonstrate progress tracking.</p>
+        <div class="project-grid" id="projectGrid">
+          <article class="project-card" data-category="html">
+            <span class="project-tag">HTML/CSS</span>
+            <h3>Personal Profile Page</h3>
+            <p>First lab task: semantic tags, lists, and basic styling.</p>
+            <a href="#" class="project-link">View details</a>
+          </article>
+          <article class="project-card" data-category="js">
+            <span class="project-tag">JavaScript</span>
+            <h3>Form Validation Demo</h3>
+            <p>Client-side validation with success and error feedback messages.</p>
+            <a href="#contact" class="project-link">Try form</a>
+          </article>
+          <article class="project-card" data-category="responsive">
+            <span class="project-tag">Responsive</span>
+            <h3>Mobile Navigation</h3>
+            <p>Collapsible menu and smooth scrolling between page sections.</p>
+            <a href="#home" class="project-link">Back to top</a>
+          </article>
+        </div>
+        <div class="filter-bar">
+          <label for="projectFilter">Filter by category:</label>
+          <select id="projectFilter">
+            <option value="all">All</option>
+            <option value="html">HTML/CSS</option>
+            <option value="js">JavaScript</option>
+            <option value="responsive">Responsive</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-muted">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
         <form class="contact-form" id="contactForm">
           <label for="name">Name</label>
-          <input id="name" type="text" placeholder="Your name">
+          <input id="name" type="text" placeholder="Your name" required>
 
           <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@example.com">
+          <input id="email" type="email" placeholder="you@example.com" required>
 
           <label for="message">Message</label>
-          <textarea id="message" rows="4" placeholder="Write your message"></textarea>
+          <textarea id="message" rows="4" placeholder="Write your message" required></textarea>
 
-          <button type="submit" class="btn">Send Message</button>
-          <p class="form-status" id="formStatus"></p>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
+    <div class="container footer-inner">
       <p>&copy; <span id="year"></span> Web Programming Assignment</p>
+      <p class="footer-note">Phase 2 — portfolio section and layout improvements</p>
     </div>
   </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>↑</button>
 
   <script src="script.js"></script>
 </body>
