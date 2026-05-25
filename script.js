@@ -1,12 +1,57 @@
 const yearElement = document.getElementById("year");
 const menuToggle = document.getElementById("menuToggle");
-const topNav = document.querySelector(".top-nav");
-const navLinks = document.querySelectorAll('.top-nav a[href^="#"]');
+const topNav = document.getElementById("topNav");
+const navLinks = document.querySelectorAll(".nav-link");
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
+const siteHeader = document.getElementById("siteHeader");
+const backToTop = document.getElementById("backToTop");
+const themeToggle = document.getElementById("themeToggle");
+const projectFilter = document.getElementById("projectFilter");
+const projectCards = document.querySelectorAll(".project-card");
+
+const THEME_KEY = "wplab-theme";
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
+}
+
+function setActiveNavLink() {
+  const scrollPos = window.scrollY + 120;
+  let currentId = "home";
+
+  document.querySelectorAll("main section[id]").forEach((section) => {
+    if (scrollPos >= section.offsetTop) {
+      currentId = section.id;
+    }
+  });
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    link.classList.toggle("active", href === `#${currentId}`);
+  });
+}
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  if (themeToggle) {
+    themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+  }
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(saved || (prefersDark ? "dark" : "light"));
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
 }
 
 if (menuToggle && topNav) {
@@ -22,10 +67,36 @@ navLinks.forEach((link) => {
     if (!target) return;
 
     event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    if (topNav) topNav.classList.remove("open");
+    const offset = siteHeader ? siteHeader.offsetHeight + 12 : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+    topNav.classList.remove("open");
   });
 });
+
+window.addEventListener("scroll", () => {
+  setActiveNavLink();
+  if (backToTop) {
+    backToTop.hidden = window.scrollY < 320;
+  }
+});
+
+if (backToTop) {
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+if (projectFilter) {
+  projectFilter.addEventListener("change", () => {
+    const value = projectFilter.value;
+    projectCards.forEach((card) => {
+      const category = card.getAttribute("data-category");
+      const show = value === "all" || category === value;
+      card.classList.toggle("is-hidden", !show);
+    });
+  });
+}
 
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", (event) => {
@@ -42,8 +113,17 @@ if (contactForm && formStatus) {
       return;
     }
 
+    if (!String(email.value).includes("@")) {
+      formStatus.textContent = "Please enter a valid email address.";
+      formStatus.className = "form-status error";
+      return;
+    }
+
     formStatus.textContent = "Message submitted successfully (demo only).";
     formStatus.className = "form-status success";
     contactForm.reset();
   });
 }
+
+initTheme();
+setActiveNavLink();

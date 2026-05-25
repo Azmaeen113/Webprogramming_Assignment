@@ -8,9 +8,15 @@ This repository contains my Web Programming lab assignment project.
 - Added multiple page sections: Home, About, Features, and Contact.
 - Added beginner-friendly interactivity: mobile menu toggle, smooth scroll navigation, and simple contact form validation.
 
+## Phase 2 (Week 2 Progress)
+
+- Added a **Projects** section with lab work cards and category filter.
+- Improved layout with sticky header, Inter font, CSS variables, and card hover effects.
+- Added dark/light theme toggle saved in `localStorage`.
+- Added scroll-aware active navigation, back-to-top button, and stronger form validation.
+
 ## Next Planned Phases
 
-- Improve responsive design and visual polish.
-- Add a dedicated projects/portfolio section.
-- Add richer JavaScript features and storage.
-- Prepare deployment version.
+- Add assignment submission gallery or image previews.
+- Add animation and accessibility improvements.
+- Prepare deployment version (GitHub Pages).
