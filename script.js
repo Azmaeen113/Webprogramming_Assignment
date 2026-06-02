@@ -14,6 +14,7 @@ const galleryPreview = document.getElementById("galleryPreview");
 const faqItems = document.querySelectorAll(".faq-item");
 
 const THEME_KEY = "wplab-theme";
+const FILTER_KEY = "wplab-project-filter";
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
@@ -91,13 +92,25 @@ if (backToTop) {
 }
 
 if (projectFilter) {
-  projectFilter.addEventListener("change", () => {
-    const value = projectFilter.value;
+  const savedFilter = localStorage.getItem(FILTER_KEY);
+  if (savedFilter) {
+    projectFilter.value = savedFilter;
+  }
+
+  const applyFilter = (value) => {
     projectCards.forEach((card) => {
       const category = card.getAttribute("data-category");
       const show = value === "all" || category === value;
       card.classList.toggle("is-hidden", !show);
     });
+  };
+
+  applyFilter(projectFilter.value);
+
+  projectFilter.addEventListener("change", () => {
+    const value = projectFilter.value;
+    applyFilter(value);
+    localStorage.setItem(FILTER_KEY, value);
   });
 }
 

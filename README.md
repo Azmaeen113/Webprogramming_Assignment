@@ -21,7 +21,21 @@ This repository contains my Web Programming lab assignment project.
 - Added an FAQ section using accessible `details/summary` elements.
 - Added JavaScript behavior for single-open FAQ accordion mode.
 
+## Phase 4 (Week 4 Progress)
+
+- Added accessibility upgrades: skip link, `:focus-visible` styles, and reduced-motion support.
+- Added a roadmap section that documents all project phases inside the page.
+- Improved UX persistence by saving project filter selection in `localStorage`.
+- Added GitHub Pages deployment steps below.
+
+## GitHub Pages Deployment
+
+1. Go to repository **Settings**.
+2. Open **Pages**.
+3. Under **Build and deployment**, choose source: `Deploy from a branch`.
+4. Select branch: `main` and folder: `/ (root)`.
+5. Save and wait for the public link to appear.
+
 ## Next Planned Phases
 
-- Add animation and accessibility improvements.
-- Prepare deployment version (GitHub Pages).
+- Add minor UI refinement and content expansion as needed.
