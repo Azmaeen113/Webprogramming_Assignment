@@ -9,6 +9,9 @@ const backToTop = document.getElementById("backToTop");
 const themeToggle = document.getElementById("themeToggle");
 const projectFilter = document.getElementById("projectFilter");
 const projectCards = document.querySelectorAll(".project-card");
+const galleryItems = document.querySelectorAll(".gallery-item");
+const galleryPreview = document.getElementById("galleryPreview");
+const faqItems = document.querySelectorAll(".faq-item");
 
 const THEME_KEY = "wplab-theme";
 
@@ -97,6 +100,25 @@ if (projectFilter) {
     });
   });
 }
+
+galleryItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    if (!galleryPreview) return;
+    const text = item.getAttribute("data-full");
+    galleryPreview.textContent = text || "Preview unavailable.";
+  });
+});
+
+faqItems.forEach((item) => {
+  item.addEventListener("toggle", () => {
+    if (!item.open) return;
+    faqItems.forEach((other) => {
+      if (other !== item && other.open) {
+        other.open = false;
+      }
+    });
+  });
+});
 
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", (event) => {

@@ -15,8 +15,13 @@ This repository contains my Web Programming lab assignment project.
 - Added dark/light theme toggle saved in `localStorage`.
 - Added scroll-aware active navigation, back-to-top button, and stronger form validation.
 
+## Phase 3 (Week 3 Progress)
+
+- Added an assignment gallery section with interactive preview text.
+- Added an FAQ section using accessible `details/summary` elements.
+- Added JavaScript behavior for single-open FAQ accordion mode.
+
 ## Next Planned Phases
 
-- Add assignment submission gallery or image previews.
 - Add animation and accessibility improvements.
 - Prepare deployment version (GitHub Pages).
