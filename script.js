@@ -7,14 +7,13 @@ const formStatus = document.getElementById("formStatus");
 const siteHeader = document.getElementById("siteHeader");
 const backToTop = document.getElementById("backToTop");
 const themeToggle = document.getElementById("themeToggle");
-const projectFilter = document.getElementById("projectFilter");
-const projectCards = document.querySelectorAll(".project-card");
-const galleryItems = document.querySelectorAll(".gallery-item");
-const galleryPreview = document.getElementById("galleryPreview");
+const serviceFilter = document.getElementById("serviceFilter");
+const serviceCards = document.querySelectorAll(".service-card");
 const faqItems = document.querySelectorAll(".faq-item");
+const statNumbers = document.querySelectorAll(".stat-num");
 
-const THEME_KEY = "wplab-theme";
-const FILTER_KEY = "wplab-project-filter";
+const THEME_KEY = "freelancehub-theme";
+const FILTER_KEY = "freelancehub-service-filter";
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
@@ -51,10 +50,30 @@ function initTheme() {
   applyTheme(saved || (prefersDark ? "dark" : "light"));
 }
 
+function animateCounters() {
+  statNumbers.forEach((counter) => {
+    const target = parseInt(counter.getAttribute("data-target"), 10);
+    if (!target) return;
+
+    let current = 0;
+    const step = target / 60;
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        counter.textContent = String(target);
+        clearInterval(timer);
+      } else {
+        counter.textContent = String(Math.floor(current));
+      }
+    }, 25);
+  });
+}
+
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme");
-    applyTheme(current === "dark" ? "light" : "dark");
+    applyTheme(current === "light" ? "dark" : "light");
   });
 }
 
@@ -91,36 +110,28 @@ if (backToTop) {
   });
 }
 
-if (projectFilter) {
+if (serviceFilter) {
   const savedFilter = localStorage.getItem(FILTER_KEY);
   if (savedFilter) {
-    projectFilter.value = savedFilter;
+    serviceFilter.value = savedFilter;
   }
 
   const applyFilter = (value) => {
-    projectCards.forEach((card) => {
+    serviceCards.forEach((card) => {
       const category = card.getAttribute("data-category");
       const show = value === "all" || category === value;
       card.classList.toggle("is-hidden", !show);
     });
   };
 
-  applyFilter(projectFilter.value);
+  applyFilter(serviceFilter.value);
 
-  projectFilter.addEventListener("change", () => {
-    const value = projectFilter.value;
+  serviceFilter.addEventListener("change", () => {
+    const value = serviceFilter.value;
     applyFilter(value);
     localStorage.setItem(FILTER_KEY, value);
   });
 }
-
-galleryItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    if (!galleryPreview) return;
-    const text = item.getAttribute("data-full");
-    galleryPreview.textContent = text || "Preview unavailable.";
-  });
-});
 
 faqItems.forEach((item) => {
   item.addEventListener("toggle", () => {
@@ -138,12 +149,14 @@ if (contactForm && formStatus) {
     event.preventDefault();
 
     const name = document.getElementById("name");
+    const studentId = document.getElementById("studentId");
+    const dept = document.getElementById("dept");
+    const track = document.getElementById("track");
     const email = document.getElementById("email");
-    const message = document.getElementById("message");
     const hasValue = (el) => Boolean(el && String(el.value).trim());
 
-    if (!hasValue(name) || !hasValue(email) || !hasValue(message)) {
-      formStatus.textContent = "Please fill in all fields before submitting.";
+    if (!hasValue(name) || !hasValue(studentId) || !hasValue(dept) || !hasValue(track) || !hasValue(email)) {
+      formStatus.textContent = "Please complete all required fields.";
       formStatus.className = "form-status error";
       return;
     }
@@ -154,10 +167,24 @@ if (contactForm && formStatus) {
       return;
     }
 
-    formStatus.textContent = "Message submitted successfully (demo only).";
+    formStatus.textContent = "Application submitted! We'll contact you within 48 hours. Welcome to FreeLanceHub!";
     formStatus.className = "form-status success";
     contactForm.reset();
   });
+}
+
+const heroStats = document.querySelector(".hero-stats");
+if (heroStats && statNumbers.length) {
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        counterObserver.disconnect();
+      }
+    },
+    { threshold: 0.4 }
+  );
+  counterObserver.observe(heroStats);
 }
 
 initTheme();
