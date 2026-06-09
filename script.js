@@ -77,12 +77,17 @@ navLinks.forEach((link) => {
   });
 });
 
-window.addEventListener("scroll", () => {
+function updateScrollState() {
   setActiveNavLink();
+  if (siteHeader) {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
   if (backToTop) {
     backToTop.hidden = window.scrollY < 320;
   }
-});
+}
+
+window.addEventListener("scroll", updateScrollState);
 
 if (backToTop) {
   backToTop.addEventListener("click", () => {
@@ -167,4 +172,4 @@ if (heroStats && statNumbers.length) {
   counterObserver.observe(heroStats);
 }
 
-setActiveNavLink();
+updateScrollState();
