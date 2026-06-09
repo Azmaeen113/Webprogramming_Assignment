@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FreeLanceHub KUET — the official freelancing and digital skills club at Khulna University of Engineering & Technology.">
-  <title>FreeLanceHub KUET — Freelancing Club</title>
+  <meta name="description" content="freelanceHUB-KUET — the official freelancing and digital skills club at Khulna University of Engineering & Technology.">
+  <title>freelanceHUB-KUET</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <a href="#mainContent" class="skip-link">Skip to main content</a>
 
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <div class="brand">
-        <p class="logo-mark">⚡</p>
+      <a href="#home" class="brand">
+        <span class="logo-mark">FH</span>
         <div>
-          <h1>FreeLance<strong>Hub</strong></h1>
-          <p class="subtitle">Freelancing Club · KUET</p>
+          <p class="brand-name">freelance<strong>HUB</strong>-KUET</p>
+          <p class="subtitle">Freelancing Club</p>
         </div>
-      </div>
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark mode</button>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
-      </div>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="top-nav" id="topNav">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#about" class="nav-link">About</a>
@@ -33,97 +34,116 @@
         <a href="#events" class="nav-link">Events</a>
         <a href="#team" class="nav-link">Team</a>
         <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#join" class="nav-link">Join</a>
+        <a href="#join" class="nav-link nav-cta">Join</a>
       </nav>
     </div>
   </header>
 
   <main id="mainContent">
     <section id="home" class="hero">
-      <div class="hero-glow"></div>
-      <div class="container">
-        <span class="hero-badge">Est. 2024 · KUET Campus</span>
-        <h2>Build Skills. <span class="accent">Earn Money.</span> Shape Your Future.</h2>
-        <p>
-          The official freelancing and digital skills club of
-          <strong>Khulna University of Engineering & Technology</strong>.
-          We help students learn marketable skills and start earning online.
-        </p>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-num" data-target="120">0</span>+
-            <span class="stat-label">Members</span>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Est. 2024 · KUET Campus</span>
+          <h2>Build skills. Earn income. Lead your future.</h2>
+          <p>
+            The official freelancing and digital skills club of
+            <strong>Khulna University of Engineering & Technology</strong>.
+            We help students learn marketable skills and start earning online.
+          </p>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-num" data-target="120">0</span>+
+              <span class="stat-label">Members</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-target="35">0</span>+
+              <span class="stat-label">Workshops</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-target="500">0</span>k+
+              <span class="stat-label">Earned by Members</span>
+            </div>
           </div>
-          <div class="stat">
-            <span class="stat-num" data-target="35">0</span>+
-            <span class="stat-label">Workshops</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num" data-target="500">0</span>k+
-            <span class="stat-label">Earned by Members</span>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#join">Join the Club</a>
+            <a class="btn btn-secondary" href="#about">Learn More</a>
           </div>
         </div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#join">Join the Club</a>
-          <a class="btn btn-outline" href="#about">Learn More</a>
-        </div>
+        <figure class="hero-media">
+          <img src="image.png" alt="KUET campus landmark at Khulna University of Engineering and Technology" width="640" height="480" loading="eager">
+          <figcaption>Khulna University of Engineering &amp; Technology</figcaption>
+        </figure>
       </div>
     </section>
 
     <section id="about" class="section">
       <div class="container">
-        <h2 class="section-title">Who We Are</h2>
-        <p class="section-lead">
-          FreeLanceHub KUET is a student-led club dedicated to empowering engineering students
-          with freelancing skills, marketplace knowledge, and a strong professional network.
-        </p>
-        <ul class="about-list">
-          <li>Weekly skill-building workshops on campus</li>
-          <li>Peer mentoring and buddy system for new members</li>
-          <li>Real client-style project simulations</li>
-          <li>Portfolio building sessions for Fiverr & Upwork</li>
-        </ul>
+        <div class="section-header">
+          <span class="section-tag">About Us</span>
+          <h2 class="section-title">Who We Are</h2>
+          <p class="section-lead">
+            freelanceHUB-KUET is a student-led club dedicated to empowering engineering students
+            with freelancing skills, marketplace knowledge, and a strong professional network.
+          </p>
+        </div>
+        <div class="about-grid">
+          <ul class="about-list">
+            <li>Weekly skill-building workshops on campus</li>
+            <li>Peer mentoring and buddy system for new members</li>
+            <li>Real client-style project simulations</li>
+            <li>Portfolio building sessions for Fiverr &amp; Upwork</li>
+          </ul>
+          <div class="about-highlight">
+            <p class="about-quote">
+              &ldquo;From campus to clients — we bridge the gap between classroom learning and real-world earning.&rdquo;
+            </p>
+            <p class="about-meta">Student-led · Campus-based · Career-focused</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="services" class="section section-muted">
+    <section id="services" class="section section-alt">
       <div class="container">
-        <h2 class="section-title">What We Do</h2>
-        <p class="section-lead">Six core tracks designed for KUET students entering the freelance world.</p>
+        <div class="section-header">
+          <span class="section-tag">Programs</span>
+          <h2 class="section-title">What We Do</h2>
+          <p class="section-lead">Six core tracks designed for KUET students entering the freelance world.</p>
+        </div>
         <div class="feature-grid" id="serviceGrid">
           <article class="card service-card" data-category="design">
-            <span class="project-tag">Beginner Friendly</span>
+            <span class="card-tag">Beginner Friendly</span>
             <h3>UI/UX Design</h3>
             <p>Figma, wireframing, prototyping, and user research for digital products.</p>
           </article>
           <article class="card service-card" data-category="dev">
-            <span class="project-tag">High Demand</span>
+            <span class="card-tag">High Demand</span>
             <h3>Web Development</h3>
             <p>HTML, CSS, JavaScript, and modern stacks to build client websites.</p>
           </article>
           <article class="card service-card" data-category="ai">
-            <span class="project-tag">Trending</span>
-            <h3>AI & Automation</h3>
+            <span class="card-tag">Trending</span>
+            <h3>AI &amp; Automation</h3>
             <p>Prompt engineering, AI tools, and workflow automation for freelancers.</p>
           </article>
           <article class="card service-card" data-category="writing">
-            <span class="project-tag">Flexible</span>
+            <span class="card-tag">Flexible</span>
             <h3>Content Writing</h3>
             <p>Blogs, copywriting, SEO content, and technical writing skills.</p>
           </article>
           <article class="card service-card" data-category="data">
-            <span class="project-tag">Tech-Focused</span>
+            <span class="card-tag">Tech-Focused</span>
             <h3>Data Analysis</h3>
             <p>Excel, Python, and dashboards that turn data into client insights.</p>
           </article>
           <article class="card service-card" data-category="marketing">
-            <span class="project-tag">High Earning</span>
+            <span class="card-tag">High Earning</span>
             <h3>Digital Marketing</h3>
             <p>SEO, social media, paid ads, and email marketing for businesses.</p>
           </article>
         </div>
         <div class="filter-bar">
-          <label for="serviceFilter">Filter skill track:</label>
+          <label for="serviceFilter">Filter skill track</label>
           <select id="serviceFilter">
             <option value="all">All Tracks</option>
             <option value="design">UI/UX Design</option>
@@ -139,12 +159,15 @@
 
     <section id="events" class="section">
       <div class="container">
-        <h2 class="section-title">Upcoming Events</h2>
-        <p class="section-lead">Workshops, bootcamps, and talks happening at KUET this semester.</p>
+        <div class="section-header">
+          <span class="section-tag">Calendar</span>
+          <h2 class="section-title">Upcoming Events</h2>
+          <p class="section-lead">Workshops, bootcamps, and talks happening at KUET this semester.</p>
+        </div>
         <div class="events-list">
           <article class="event-card">
             <div class="event-date"><span>15</span><small>May</small></div>
-            <div>
+            <div class="event-body">
               <span class="event-type">Workshop</span>
               <h3>Fiverr Profile Mastery — Getting Your First Order</h3>
               <p>CSE Seminar Hall · 3:00 PM – 5:00 PM</p>
@@ -152,7 +175,7 @@
           </article>
           <article class="event-card">
             <div class="event-date"><span>22</span><small>May</small></div>
-            <div>
+            <div class="event-body">
               <span class="event-type">Bootcamp</span>
               <h3>3-Day Web Design Sprint — Build a Portfolio Site</h3>
               <p>Lab 203, KUET · 9:00 AM – 1:00 PM</p>
@@ -160,7 +183,7 @@
           </article>
           <article class="event-card">
             <div class="event-date"><span>01</span><small>Jun</small></div>
-            <div>
+            <div class="event-body">
               <span class="event-type">Panel Talk</span>
               <h3>Alumni Earning Stories — From KUET to $5000/month</h3>
               <p>Auditorium, KUET · 4:00 PM – 6:00 PM</p>
@@ -170,10 +193,13 @@
       </div>
     </section>
 
-    <section id="team" class="section section-muted">
+    <section id="team" class="section section-alt">
       <div class="container">
-        <h2 class="section-title">Meet Our Core Team</h2>
-        <p class="section-lead">Students leading students — that's the FreeLanceHub way.</p>
+        <div class="section-header">
+          <span class="section-tag">Leadership</span>
+          <h2 class="section-title">Meet Our Core Team</h2>
+          <p class="section-lead">Students leading students — that's the freelanceHUB way.</p>
+        </div>
         <div class="team-grid">
           <article class="team-card">
             <div class="team-avatar">RI</div>
@@ -197,18 +223,21 @@
             <div class="team-avatar">PD</div>
             <h3>Priya Das</h3>
             <p class="team-role">Creative Director</p>
-            <p>ME '22 · UI/UX & Figma Expert</p>
+            <p>ME '22 · UI/UX &amp; Figma Expert</p>
           </article>
         </div>
       </div>
     </section>
 
     <section id="faq" class="section">
-      <div class="container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-tag">Support</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
         <div class="faq-list">
           <details class="faq-item">
-            <summary>Who can join FreeLanceHub KUET?</summary>
+            <summary>Who can join freelanceHUB-KUET?</summary>
             <p>Any KUET student interested in freelancing, digital skills, or earning online can apply through our join form.</p>
           </details>
           <details class="faq-item">
@@ -227,72 +256,82 @@
       </div>
     </section>
 
-    <section id="join" class="section section-muted">
+    <section id="join" class="section section-join">
       <div class="container">
-        <h2 class="section-title">Join FreeLanceHub Today</h2>
-        <p class="section-lead">Fill out the form and our team will contact you within 48 hours with onboarding details.</p>
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input id="name" type="text" placeholder="e.g. Rahim Uddin" required>
+        <div class="join-grid">
+          <div class="join-intro">
+            <span class="section-tag">Membership</span>
+            <h2 class="section-title">Join freelanceHUB Today</h2>
+            <p class="section-lead">Fill out the form and our team will contact you within 48 hours with onboarding details.</p>
+            <ul class="join-perks">
+              <li>Free membership for all KUET students</li>
+              <li>Hands-on workshops every week</li>
+              <li>Mentorship from experienced freelancers</li>
+            </ul>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="e.g. Rahim Uddin" required>
+              </div>
+              <div class="form-group">
+                <label for="studentId">Student ID</label>
+                <input id="studentId" type="text" placeholder="e.g. 2103041" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dept">Department</label>
+                <select id="dept" required>
+                  <option value="">Select Department</option>
+                  <option>Computer Science & Engineering</option>
+                  <option>Electrical & Electronic Engineering</option>
+                  <option>Mechanical Engineering</option>
+                  <option>Civil Engineering</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="track">Preferred Skill Track</label>
+                <select id="track" required>
+                  <option value="">Choose a Track</option>
+                  <option>UI/UX Design</option>
+                  <option>Web Development</option>
+                  <option>AI & Automation</option>
+                  <option>Content Writing</option>
+                  <option>Data Analysis</option>
+                  <option>Digital Marketing</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
-              <label for="studentId">Student ID</label>
-              <input id="studentId" type="text" placeholder="e.g. 2103041" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="dept">Department</label>
-              <select id="dept" required>
-                <option value="">Select Department</option>
-                <option>Computer Science & Engineering</option>
-                <option>Electrical & Electronic Engineering</option>
-                <option>Mechanical Engineering</option>
-                <option>Civil Engineering</option>
-                <option>Other</option>
-              </select>
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@student.kuet.ac.bd" required>
             </div>
             <div class="form-group">
-              <label for="track">Preferred Skill Track</label>
-              <select id="track" required>
-                <option value="">Choose a Track</option>
-                <option>UI/UX Design</option>
-                <option>Web Development</option>
-                <option>AI & Automation</option>
-                <option>Content Writing</option>
-                <option>Data Analysis</option>
-                <option>Digital Marketing</option>
-              </select>
+              <label for="message">Why do you want to join? <span class="optional">(optional)</span></label>
+              <textarea id="message" rows="3" placeholder="Tell us about your goals..."></textarea>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="you@student.kuet.ac.bd" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Why do you want to join? <span class="optional">(optional)</span></label>
-            <textarea id="message" rows="3" placeholder="Tell us about your goals..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Application</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
+            <button type="submit" class="btn btn-primary btn-full">Submit Application</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <p class="footer-brand">FreeLance<strong>Hub</strong> KUET</p>
+      <div class="footer-brand-block">
+        <p class="footer-brand">freelance<strong>HUB</strong>-KUET</p>
         <p>Empowering KUET students to build real skills and earn real income through freelancing.</p>
       </div>
       <div class="footer-contact">
         <p>Room 204, CSE Building, KUET, Khulna-9203</p>
-        <p>freelancehub@kuet.ac.bd</p>
+        <p><a href="mailto:freelancehub@kuet.ac.bd">freelancehub@kuet.ac.bd</a></p>
       </div>
-      <p class="footer-copy">&copy; <span id="year"></span> FreeLanceHub KUET. Made with care by KUET students.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> freelanceHUB-KUET. Made with care by KUET students.</p>
     </div>
   </footer>
 

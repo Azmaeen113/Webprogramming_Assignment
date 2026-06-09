@@ -6,13 +6,11 @@ const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 const siteHeader = document.getElementById("siteHeader");
 const backToTop = document.getElementById("backToTop");
-const themeToggle = document.getElementById("themeToggle");
 const serviceFilter = document.getElementById("serviceFilter");
 const serviceCards = document.querySelectorAll(".service-card");
 const faqItems = document.querySelectorAll(".faq-item");
 const statNumbers = document.querySelectorAll(".stat-num");
 
-const THEME_KEY = "freelancehub-theme";
 const FILTER_KEY = "freelancehub-service-filter";
 
 if (yearElement) {
@@ -35,21 +33,6 @@ function setActiveNavLink() {
   });
 }
 
-function applyTheme(theme) {
-  const isDark = theme === "dark";
-  document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-  if (themeToggle) {
-    themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
-  }
-  localStorage.setItem(THEME_KEY, theme);
-}
-
-function initTheme() {
-  const saved = localStorage.getItem(THEME_KEY);
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(saved || (prefersDark ? "dark" : "light"));
-}
-
 function animateCounters() {
   statNumbers.forEach((counter) => {
     const target = parseInt(counter.getAttribute("data-target"), 10);
@@ -70,16 +53,10 @@ function animateCounters() {
   });
 }
 
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme");
-    applyTheme(current === "light" ? "dark" : "light");
-  });
-}
-
 if (menuToggle && topNav) {
   menuToggle.addEventListener("click", () => {
-    topNav.classList.toggle("open");
+    const isOpen = topNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
 
@@ -94,6 +71,9 @@ navLinks.forEach((link) => {
     const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: "smooth" });
     topNav.classList.remove("open");
+    if (menuToggle) {
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
   });
 });
 
@@ -167,7 +147,7 @@ if (contactForm && formStatus) {
       return;
     }
 
-    formStatus.textContent = "Application submitted! We'll contact you within 48 hours. Welcome to FreeLanceHub!";
+    formStatus.textContent = "Application submitted! We'll contact you within 48 hours. Welcome to freelanceHUB-KUET!";
     formStatus.className = "form-status success";
     contactForm.reset();
   });
@@ -187,5 +167,4 @@ if (heroStats && statNumbers.length) {
   counterObserver.observe(heroStats);
 }
 
-initTheme();
 setActiveNavLink();
