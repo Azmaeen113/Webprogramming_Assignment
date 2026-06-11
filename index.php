@@ -171,6 +171,11 @@ require_once __DIR__ . '/includes/data.php';
             </ul>
           </div>
           <form class="contact-form" id="contactForm" method="post" action="form-handler.php">
+            <?php if (isset($_GET['submitted']) && $_GET['submitted'] === '1'): ?>
+            <p class="form-status success" role="status">
+              Your application has been submitted. We will contact you within 48 hours.
+            </p>
+            <?php endif; ?>
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name</label>
