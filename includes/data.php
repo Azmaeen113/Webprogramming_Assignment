@@ -50,3 +50,30 @@ $skill_tracks = [
         'description' => 'SEO, social media, paid ads, and email marketing for businesses.',
     ],
 ];
+
+$events = [
+    [
+        'date_day' => '15',
+        'date_month' => 'May',
+        'type' => 'Workshop',
+        'title' => 'Fiverr Profile Mastery — Getting Your First Order',
+        'location' => 'CSE Seminar Hall',
+        'time' => '3:00 PM – 5:00 PM',
+    ],
+    [
+        'date_day' => '22',
+        'date_month' => 'May',
+        'type' => 'Bootcamp',
+        'title' => '3-Day Web Design Sprint — Build a Portfolio Site',
+        'location' => 'Lab 203, KUET',
+        'time' => '9:00 AM – 1:00 PM',
+    ],
+    [
+        'date_day' => '01',
+        'date_month' => 'Jun',
+        'type' => 'Panel Talk',
+        'title' => 'Alumni Earning Stories — From KUET to $5000/month',
+        'location' => 'Auditorium, KUET',
+        'time' => '4:00 PM – 6:00 PM',
+    ],
+];

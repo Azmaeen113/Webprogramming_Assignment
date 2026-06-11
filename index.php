@@ -106,30 +106,16 @@ require_once __DIR__ . '/includes/data.php';
           <p class="section-lead">Workshops, bootcamps, and talks happening at KUET this semester.</p>
         </div>
         <div class="events-list">
+          <?php foreach ($events as $event): ?>
           <article class="event-card">
-            <div class="event-date"><span>15</span><small>May</small></div>
+            <div class="event-date"><span><?php echo htmlspecialchars($event['date_day']); ?></span><small><?php echo htmlspecialchars($event['date_month']); ?></small></div>
             <div class="event-body">
-              <span class="event-type">Workshop</span>
-              <h3>Fiverr Profile Mastery — Getting Your First Order</h3>
-              <p>CSE Seminar Hall · 3:00 PM – 5:00 PM</p>
+              <span class="event-type"><?php echo htmlspecialchars($event['type']); ?></span>
+              <h3><?php echo htmlspecialchars($event['title']); ?></h3>
+              <p><?php echo htmlspecialchars($event['location']); ?> · <?php echo htmlspecialchars($event['time']); ?></p>
             </div>
           </article>
-          <article class="event-card">
-            <div class="event-date"><span>22</span><small>May</small></div>
-            <div class="event-body">
-              <span class="event-type">Bootcamp</span>
-              <h3>3-Day Web Design Sprint — Build a Portfolio Site</h3>
-              <p>Lab 203, KUET · 9:00 AM – 1:00 PM</p>
-            </div>
-          </article>
-          <article class="event-card">
-            <div class="event-date"><span>01</span><small>Jun</small></div>
-            <div class="event-body">
-              <span class="event-type">Panel Talk</span>
-              <h3>Alumni Earning Stories — From KUET to $5000/month</h3>
-              <p>Auditorium, KUET · 4:00 PM – 6:00 PM</p>
-            </div>
-          </article>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>
