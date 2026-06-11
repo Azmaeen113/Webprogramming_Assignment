@@ -1,15 +1,11 @@
 <?php
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
-}
-
-function sanitize_field(string $value): string
-{
-    return trim(htmlspecialchars(strip_tags($value), ENT_QUOTES, 'UTF-8'));
 }
 
 $name = sanitize_field($_POST['name'] ?? '');
@@ -29,8 +25,34 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
+$photoPath = handle_photo_upload($_FILES['photo'] ?? []);
+if ($photoPath === null) {
+    header('Location: index.php?error=photo#join');
+    exit;
+}
+
+$id = generate_submission_id();
 $timestamp = date('Y-m-d H:i:s');
-$entry = implode(' | ', [
+
+$submission = [
+    'id' => $id,
+    'name' => $name,
+    'student_id' => $studentId,
+    'department' => $department,
+    'track' => $track,
+    'email' => $email,
+    'message' => $message,
+    'photo' => $photoPath,
+    'designation' => 'Member',
+    'status' => 'pending',
+    'submitted_at' => $timestamp,
+];
+
+$submissions = load_submissions();
+$submissions[] = $submission;
+save_submissions($submissions);
+
+$textEntry = implode(' | ', [
     $timestamp,
     $name,
     $studentId,
@@ -38,9 +60,10 @@ $entry = implode(' | ', [
     $track,
     $email,
     $message !== '' ? $message : 'N/A',
+    $photoPath,
 ]) . PHP_EOL;
 
-file_put_contents(__DIR__ . '/submissions.txt', $entry, FILE_APPEND | LOCK_EX);
+file_put_contents(__DIR__ . '/submissions.txt', $textEntry, FILE_APPEND | LOCK_EX);
 
 header('Location: index.php?submitted=1#join');
 exit;
