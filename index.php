@@ -128,30 +128,14 @@ require_once __DIR__ . '/includes/data.php';
           <p class="section-lead">Students leading students — that's the freelanceHUB way.</p>
         </div>
         <div class="team-grid">
-          <article class="team-card">
-            <img class="team-avatar" src="photos/Ahnaf%20Tajwar.webp" alt="Ahnaf Tajwar" width="80" height="80" loading="lazy">
-            <h3>Ahnaf Tajwar</h3>
-            <p class="team-role">President</p>
-            <p>CSE '22 · Top-Rated Nominee (2025) · Crypto, Blockchain &amp; Full-Stack Developer</p>
+          <?php foreach ($team as $member): ?>
+          <article class="team-card" style="--member-accent: <?php echo htmlspecialchars($member['accent_color']); ?>">
+            <img class="team-avatar" src="<?php echo htmlspecialchars($member['photo']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>" width="80" height="80" loading="lazy">
+            <h3><?php echo htmlspecialchars($member['name']); ?></h3>
+            <p class="team-role"><?php echo htmlspecialchars($member['role']); ?></p>
+            <p><?php echo htmlspecialchars($member['details']); ?></p>
           </article>
-          <article class="team-card">
-            <img class="team-avatar" src="photos/Mynul%20Hasan%20Mehadi.jpg" alt="Mynul Hasan Mehadi" width="80" height="80" loading="lazy">
-            <h3>Mynul Hasan Mehadi</h3>
-            <p class="team-role">Vice President</p>
-            <p>CSE '22 · Level 2 Seller (2025) · Crypto, Blockchain, Full-Stack &amp; AI Agent Developer</p>
-          </article>
-          <article class="team-card">
-            <img class="team-avatar" src="photos/Ajoy%20Saha.jpg" alt="Ajoy Saha" width="80" height="80" loading="lazy">
-            <h3>Ajoy Saha</h3>
-            <p class="team-role">Head of Training</p>
-            <p>CSE '22 · Top-Rated Seller (2023) · UI/UX Designer</p>
-          </article>
-          <article class="team-card">
-            <img class="team-avatar" src="photos/Azmaeen%20Nur%20Sajin.jpg" alt="Azmaeen Nur Sajin" width="80" height="80" loading="lazy">
-            <h3>Azmaeen Nur Sajin</h3>
-            <p class="team-role">Creative Director</p>
-            <p>CSE '22 · Level 2 Seller (2026) · Full-Stack Developer</p>
-          </article>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>

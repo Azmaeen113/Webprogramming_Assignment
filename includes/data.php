@@ -77,3 +77,34 @@ $events = [
         'time' => '4:00 PM – 6:00 PM',
     ],
 ];
+
+$team = [
+    [
+        'name' => 'Ahnaf Tajwar',
+        'photo' => 'photos/Ahnaf Tajwar.webp',
+        'role' => 'President',
+        'details' => "CSE '22 · Top-Rated Nominee (2025) · Crypto, Blockchain & Full-Stack Developer",
+        'accent_color' => '#7C3AED',
+    ],
+    [
+        'name' => 'Mynul Hasan Mehadi',
+        'photo' => 'photos/Mynul Hasan Mehadi.jpg',
+        'role' => 'Vice President',
+        'details' => "CSE '22 · Level 2 Seller (2025) · Crypto, Blockchain, Full-Stack & AI Agent Developer",
+        'accent_color' => '#00C9A7',
+    ],
+    [
+        'name' => 'Ajoy Saha',
+        'photo' => 'photos/Ajoy Saha.jpg',
+        'role' => 'Head of Training',
+        'details' => "CSE '22 · Top-Rated Seller (2023) · UI/UX Designer",
+        'accent_color' => '#2563EB',
+    ],
+    [
+        'name' => 'Azmaeen Nur Sajin',
+        'photo' => 'photos/Azmaeen Nur Sajin.jpg',
+        'role' => 'Creative Director',
+        'details' => "CSE '22 · Level 2 Seller (2026) · Full-Stack Developer",
+        'accent_color' => '#F97316',
+    ],
+];
