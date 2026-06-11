@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+require_once __DIR__ . '/config.php';
+?>
 <?php include 'includes/header.php'; ?>
 <body>
 <?php include 'includes/navbar.php'; ?>
