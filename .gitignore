@@ -1,3 +1,7 @@
 README.md
 prompt*.md
 .vscode/
+submissions.txt
+data/submissions.json
+uploads/applications/*
+!uploads/applications/.gitkeep

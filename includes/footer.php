@@ -14,6 +14,6 @@
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>↑</button>
 
-  <script src="script.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>

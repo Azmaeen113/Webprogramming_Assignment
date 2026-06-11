@@ -130,35 +130,6 @@ faqItems.forEach((item) => {
   });
 });
 
-if (contactForm && formStatus) {
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById("name");
-    const studentId = document.getElementById("studentId");
-    const dept = document.getElementById("dept");
-    const track = document.getElementById("track");
-    const email = document.getElementById("email");
-    const hasValue = (el) => Boolean(el && String(el.value).trim());
-
-    if (!hasValue(name) || !hasValue(studentId) || !hasValue(dept) || !hasValue(track) || !hasValue(email)) {
-      formStatus.textContent = "Please complete all required fields.";
-      formStatus.className = "form-status error";
-      return;
-    }
-
-    if (!String(email.value).includes("@")) {
-      formStatus.textContent = "Please enter a valid email address.";
-      formStatus.className = "form-status error";
-      return;
-    }
-
-    formStatus.textContent = "Application submitted! We'll contact you within 48 hours. Welcome to freelanceHUB-KUET!";
-    formStatus.className = "form-status success";
-    contactForm.reset();
-  });
-}
-
 const heroStats = document.querySelector(".hero-stats");
 if (heroStats && statNumbers.length) {
   const counterObserver = new IntersectionObserver(
