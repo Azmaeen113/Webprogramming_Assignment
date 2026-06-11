@@ -170,21 +170,21 @@ require_once __DIR__ . '/includes/data.php';
               <li>Mentorship from experienced freelancers</li>
             </ul>
           </div>
-          <form class="contact-form" id="contactForm">
+          <form class="contact-form" id="contactForm" method="post" action="form-handler.php">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name</label>
-                <input id="name" type="text" placeholder="e.g. Rahim Uddin" required>
+                <input id="name" name="name" type="text" placeholder="e.g. Rahim Uddin" required>
               </div>
               <div class="form-group">
                 <label for="studentId">Student ID</label>
-                <input id="studentId" type="text" placeholder="e.g. 2103041" required>
+                <input id="studentId" name="student_id" type="text" placeholder="e.g. 2103041" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="dept">Department</label>
-                <select id="dept" required>
+                <select id="dept" name="department" required>
                   <option value="">Select Department</option>
                   <option>Computer Science & Engineering</option>
                   <option>Electrical & Electronic Engineering</option>
@@ -195,24 +195,21 @@ require_once __DIR__ . '/includes/data.php';
               </div>
               <div class="form-group">
                 <label for="track">Preferred Skill Track</label>
-                <select id="track" required>
+                <select id="track" name="track" required>
                   <option value="">Choose a Track</option>
-                  <option>UI/UX Design</option>
-                  <option>Web Development</option>
-                  <option>AI & Automation</option>
-                  <option>Content Writing</option>
-                  <option>Data Analysis</option>
-                  <option>Digital Marketing</option>
+                  <?php foreach ($skill_tracks as $skill): ?>
+                  <option><?php echo htmlspecialchars($skill['name']); ?></option>
+                  <?php endforeach; ?>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@student.kuet.ac.bd" required>
+              <input id="email" name="email" type="email" placeholder="you@student.kuet.ac.bd" required>
             </div>
             <div class="form-group">
               <label for="message">Why do you want to join? <span class="optional">(optional)</span></label>
-              <textarea id="message" rows="3" placeholder="Tell us about your goals..."></textarea>
+              <textarea id="message" name="message" rows="3" placeholder="Tell us about your goals..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-full">Submit Application</button>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
