@@ -147,22 +147,12 @@ require_once __DIR__ . '/includes/data.php';
           <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
         <div class="faq-list">
+          <?php foreach ($faq as $item): ?>
           <details class="faq-item">
-            <summary>Who can join freelanceHUB-KUET?</summary>
-            <p>Any KUET student interested in freelancing, digital skills, or earning online can apply through our join form.</p>
+            <summary><?php echo htmlspecialchars($item['question']); ?></summary>
+            <p><?php echo htmlspecialchars($item['answer']); ?></p>
           </details>
-          <details class="faq-item">
-            <summary>Is membership free?</summary>
-            <p>Yes. Club membership is free for KUET students. Some advanced bootcamps may have optional materials cost.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Do I need prior freelancing experience?</summary>
-            <p>No. We welcome beginners and provide mentoring, workshops, and peer support from day one.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Where do club activities take place?</summary>
-            <p>Most sessions are held at KUET campus — CSE Building, seminar halls, and innovation spaces.</p>
-          </details>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>

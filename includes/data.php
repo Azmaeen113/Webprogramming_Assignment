@@ -108,3 +108,22 @@ $team = [
         'accent_color' => '#F97316',
     ],
 ];
+
+$faq = [
+    [
+        'question' => 'Who can join freelanceHUB-KUET?',
+        'answer' => 'Any KUET student interested in freelancing, digital skills, or earning online can apply through our join form.',
+    ],
+    [
+        'question' => 'Is membership free?',
+        'answer' => 'Yes. Club membership is free for KUET students. Some advanced bootcamps may have optional materials cost.',
+    ],
+    [
+        'question' => 'Do I need prior freelancing experience?',
+        'answer' => 'No. We welcome beginners and provide mentoring, workshops, and peer support from day one.',
+    ],
+    [
+        'question' => 'Where do club activities take place?',
+        'answer' => 'Most sessions are held at KUET campus — CSE Building, seminar halls, and innovation spaces.',
+    ],
+];
