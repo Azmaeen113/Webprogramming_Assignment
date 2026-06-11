@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/includes/data.php';
+require_once __DIR__ . '/includes/functions.php';
+
+$approved_members = get_approved_members();
 ?>
 <?php include 'includes/header.php'; ?>
 <body>
@@ -140,6 +143,33 @@ require_once __DIR__ . '/includes/data.php';
       </div>
     </section>
 
+    <section id="members" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Community</span>
+          <h2 class="section-title">Our Members</h2>
+          <p class="section-lead">KUET students building freelancing careers with freelanceHUB.</p>
+        </div>
+        <?php if (count($approved_members) > 0): ?>
+        <div class="team-grid members-grid">
+          <?php foreach ($approved_members as $member): ?>
+          <article class="team-card member-card">
+            <img class="team-avatar" src="<?php echo htmlspecialchars($member['photo']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>" width="80" height="80" loading="lazy">
+            <h3><?php echo htmlspecialchars($member['name']); ?></h3>
+            <p class="team-role"><?php echo htmlspecialchars($member['designation'] ?? 'Member'); ?></p>
+            <p><?php echo htmlspecialchars($member['department']); ?> · <?php echo htmlspecialchars($member['track']); ?></p>
+            <?php if (!empty($member['message'])): ?>
+            <p class="member-bio"><?php echo htmlspecialchars($member['message']); ?></p>
+            <?php endif; ?>
+          </article>
+          <?php endforeach; ?>
+        </div>
+        <?php else: ?>
+        <p class="members-empty">Approved members will appear here after applications are reviewed by the club team.</p>
+        <?php endif; ?>
+      </div>
+    </section>
+
     <section id="faq" class="section">
       <div class="container container-narrow">
         <div class="section-header">
@@ -170,10 +200,19 @@ require_once __DIR__ . '/includes/data.php';
               <li>Mentorship from experienced freelancers</li>
             </ul>
           </div>
-          <form class="contact-form" id="contactForm" method="post" action="form-handler.php">
+          <form class="contact-form" id="contactForm" method="post" action="form-handler.php" enctype="multipart/form-data">
             <?php if (isset($_GET['submitted']) && $_GET['submitted'] === '1'): ?>
             <p class="form-status success" role="status">
               Your application has been submitted. We will contact you within 48 hours.
+            </p>
+            <?php endif; ?>
+            <?php if (isset($_GET['error']) && $_GET['error'] === 'photo'): ?>
+            <p class="form-status error" role="alert">
+              Please upload a valid profile photo (JPG, PNG, or WebP, max 2MB).
+            </p>
+            <?php elseif (isset($_GET['error'])): ?>
+            <p class="form-status error" role="alert">
+              Please complete all required fields with valid information.
             </p>
             <?php endif; ?>
             <div class="form-row">
@@ -211,6 +250,10 @@ require_once __DIR__ . '/includes/data.php';
             <div class="form-group">
               <label for="email">Email</label>
               <input id="email" name="email" type="email" placeholder="you@student.kuet.ac.bd" required>
+            </div>
+            <div class="form-group">
+              <label for="photo">Profile Photo</label>
+              <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
             </div>
             <div class="form-group">
               <label for="message">Why do you want to join? <span class="optional">(optional)</span></label>
