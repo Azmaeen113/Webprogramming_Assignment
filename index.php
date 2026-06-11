@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/includes/data.php';
 ?>
 <?php include 'includes/header.php'; ?>
 <body>
@@ -17,18 +18,12 @@ require_once __DIR__ . '/config.php';
             We help students learn marketable skills and start earning online.
           </p>
           <div class="hero-stats">
+            <?php foreach ($stats as $stat): ?>
             <div class="stat">
-              <span class="stat-num" data-target="120">0</span>+
-              <span class="stat-label">Members</span>
+              <span class="stat-num" data-target="<?php echo htmlspecialchars($stat['value']); ?>">0</span><?php echo htmlspecialchars($stat['suffix']); ?>
+              <span class="stat-label"><?php echo htmlspecialchars($stat['label']); ?></span>
             </div>
-            <div class="stat">
-              <span class="stat-num" data-target="35">0</span>+
-              <span class="stat-label">Workshops</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-target="500">0</span>k+
-              <span class="stat-label">Earned by Members</span>
-            </div>
+            <?php endforeach; ?>
           </div>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#join">Join the Club</a>
