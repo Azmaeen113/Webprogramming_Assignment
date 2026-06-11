@@ -2,13 +2,13 @@
     <div class="container footer-inner">
       <div class="footer-brand-block">
         <p class="footer-brand">freelance<strong>HUB</strong>-KUET</p>
-        <p>Empowering KUET students to build real skills and earn real income through freelancing.</p>
+        <p><?php echo SITE_TAGLINE; ?></p>
       </div>
       <div class="footer-contact">
-        <p>Room 204, CSE Building, KUET, Khulna-9203</p>
-        <p><a href="mailto:freelancehub@kuet.ac.bd">freelancehub@kuet.ac.bd</a></p>
+        <p><?php echo CONTACT_ADDRESS; ?></p>
+        <p><a href="mailto:<?php echo CONTACT_EMAIL; ?>"><?php echo CONTACT_EMAIL; ?></a></p>
       </div>
-      <p class="footer-copy">&copy; <span id="year"></span> freelanceHUB-KUET. Made with care by KUET students.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> <?php echo SITE_NAME; ?>. Made with care by KUET students.</p>
     </div>
   </footer>
 

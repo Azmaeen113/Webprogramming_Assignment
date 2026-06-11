@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="freelanceHUB-KUET — the official freelancing and digital skills club at Khulna University of Engineering & Technology.">
   <meta name="theme-color" content="#0D3B2E">
-  <title>freelanceHUB-KUET</title>
+  <title><?php echo SITE_NAME; ?></title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
