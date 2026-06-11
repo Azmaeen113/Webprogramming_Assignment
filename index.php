@@ -78,47 +78,21 @@ require_once __DIR__ . '/includes/data.php';
           <p class="section-lead">Six core tracks designed for KUET students entering the freelance world.</p>
         </div>
         <div class="feature-grid" id="serviceGrid">
-          <article class="card service-card" data-category="design">
-            <span class="card-tag">Beginner Friendly</span>
-            <h3>UI/UX Design</h3>
-            <p>Figma, wireframing, prototyping, and user research for digital products.</p>
+          <?php foreach ($skill_tracks as $track): ?>
+          <article class="card service-card" data-category="<?php echo htmlspecialchars($track['category']); ?>">
+            <span class="card-tag"><?php echo htmlspecialchars($track['badge']); ?></span>
+            <h3><?php echo htmlspecialchars($track['name']); ?></h3>
+            <p><?php echo htmlspecialchars($track['description']); ?></p>
           </article>
-          <article class="card service-card" data-category="dev">
-            <span class="card-tag">High Demand</span>
-            <h3>Web Development</h3>
-            <p>HTML, CSS, JavaScript, and modern stacks to build client websites.</p>
-          </article>
-          <article class="card service-card" data-category="ai">
-            <span class="card-tag">Trending</span>
-            <h3>AI &amp; Automation</h3>
-            <p>Prompt engineering, AI tools, and workflow automation for freelancers.</p>
-          </article>
-          <article class="card service-card" data-category="writing">
-            <span class="card-tag">Flexible</span>
-            <h3>Content Writing</h3>
-            <p>Blogs, copywriting, SEO content, and technical writing skills.</p>
-          </article>
-          <article class="card service-card" data-category="data">
-            <span class="card-tag">Tech-Focused</span>
-            <h3>Data Analysis</h3>
-            <p>Excel, Python, and dashboards that turn data into client insights.</p>
-          </article>
-          <article class="card service-card" data-category="marketing">
-            <span class="card-tag">High Earning</span>
-            <h3>Digital Marketing</h3>
-            <p>SEO, social media, paid ads, and email marketing for businesses.</p>
-          </article>
+          <?php endforeach; ?>
         </div>
         <div class="filter-bar">
           <label for="serviceFilter">Filter skill track</label>
           <select id="serviceFilter">
             <option value="all">All Tracks</option>
-            <option value="design">UI/UX Design</option>
-            <option value="dev">Web Development</option>
-            <option value="ai">AI & Automation</option>
-            <option value="writing">Content Writing</option>
-            <option value="data">Data Analysis</option>
-            <option value="marketing">Digital Marketing</option>
+            <?php foreach ($skill_tracks as $track): ?>
+            <option value="<?php echo htmlspecialchars($track['category']); ?>"><?php echo htmlspecialchars($track['name']); ?></option>
+            <?php endforeach; ?>
           </select>
         </div>
       </div>
