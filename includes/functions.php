@@ -53,6 +53,52 @@ function update_submission(string $id, array $changes): bool
     return $updated ? save_submissions($submissions) : false;
 }
 
+function submission_photo_path(string $relativePath): string
+{
+    return dirname(SUBMISSIONS_FILE) . '/../' . ltrim($relativePath, '/');
+}
+
+function delete_submission_photo(string $photoPath): void
+{
+    if ($photoPath === '') {
+        return;
+    }
+
+    $fullPath = submission_photo_path($photoPath);
+    $realPath = realpath($fullPath);
+    $uploadsDir = realpath(UPLOADS_DIR);
+
+    if ($realPath && $uploadsDir && str_starts_with($realPath, $uploadsDir) && is_file($realPath)) {
+        unlink($realPath);
+    }
+}
+
+function delete_submission(string $id): bool
+{
+    $submissions = load_submissions();
+    $removed = null;
+    $remaining = [];
+
+    foreach ($submissions as $submission) {
+        if (($submission['id'] ?? '') === $id) {
+            $removed = $submission;
+            continue;
+        }
+
+        $remaining[] = $submission;
+    }
+
+    if ($removed === null) {
+        return false;
+    }
+
+    if (!empty($removed['photo'])) {
+        delete_submission_photo($removed['photo']);
+    }
+
+    return save_submissions($remaining);
+}
+
 function get_approved_members(): array
 {
     return array_values(array_filter(
@@ -71,6 +117,26 @@ function sanitize_field(string $value): string
     return trim(htmlspecialchars(strip_tags($value), ENT_QUOTES, 'UTF-8'));
 }
 
+function detect_image_mime(string $path): ?string
+{
+    if (function_exists('finfo_open')) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        if ($finfo) {
+            $mime = finfo_file($finfo, $path);
+            if (is_string($mime) && $mime !== '') {
+                return $mime;
+            }
+        }
+    }
+
+    $info = @getimagesize($path);
+    if (is_array($info) && isset($info['mime'])) {
+        return $info['mime'];
+    }
+
+    return null;
+}
+
 function handle_photo_upload(array $file): ?string
 {
     if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
@@ -81,16 +147,14 @@ function handle_photo_upload(array $file): ?string
         return null;
     }
 
-    $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mime = finfo_file($finfo, $file['tmp_name']);
-    finfo_close($finfo);
-
-    if (!in_array($mime, $allowed, true)) {
+    if (($file['size'] ?? 0) > 2 * 1024 * 1024) {
         return null;
     }
 
-    if (($file['size'] ?? 0) > 2 * 1024 * 1024) {
+    $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    $mime = detect_image_mime($file['tmp_name']);
+
+    if ($mime === null || !in_array($mime, $allowed, true)) {
         return null;
     }
 
