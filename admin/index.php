@@ -56,6 +56,58 @@ if (!empty($_SESSION['admin_logged_in']) && $_SERVER['REQUEST_METHOD'] === 'POST
         exit;
     }
 
+    if ($action === 'update') {
+        $submission = get_submission_by_id($id);
+        if ($submission === null) {
+            header('Location: index.php?error=notfound');
+            exit;
+        }
+
+        $name = sanitize_field($_POST['name'] ?? '');
+        $studentId = sanitize_field($_POST['student_id'] ?? '');
+        $department = sanitize_field($_POST['department'] ?? '');
+        $track = sanitize_field($_POST['track'] ?? '');
+        $email = sanitize_field($_POST['email'] ?? '');
+        $message = sanitize_field($_POST['message'] ?? '');
+        $designation = sanitize_field($_POST['designation'] ?? 'Member');
+
+        if ($name === '' || $studentId === '' || $department === '' || $track === '' || $email === '') {
+            header('Location: index.php?edit=' . urlencode($id) . '&error=1');
+            exit;
+        }
+
+        if (!filter_var(html_entity_decode($email, ENT_QUOTES, 'UTF-8'), FILTER_VALIDATE_EMAIL)) {
+            header('Location: index.php?edit=' . urlencode($id) . '&error=1');
+            exit;
+        }
+
+        if ($designation === '') {
+            $designation = 'Member';
+        }
+
+        $changes = [
+            'name' => $name,
+            'student_id' => $studentId,
+            'department' => $department,
+            'track' => $track,
+            'email' => $email,
+            'message' => $message,
+            'designation' => $designation,
+        ];
+
+        $newPhoto = handle_photo_upload($_FILES['photo'] ?? []);
+        if ($newPhoto !== null) {
+            if (!empty($submission['photo'])) {
+                delete_submission_photo($submission['photo']);
+            }
+            $changes['photo'] = $newPhoto;
+        }
+
+        update_submission($id, $changes);
+        header('Location: index.php?updated=1');
+        exit;
+    }
+
     header('Location: index.php');
     exit;
 }
@@ -70,6 +122,10 @@ $approved = array_values(array_filter($submissions, static fn(array $item): bool
 $rejected = array_values(array_filter($submissions, static fn(array $item): bool => ($item['status'] ?? '') === 'rejected'));
 
 $flashDeleted = isset($_GET['deleted']);
+$flashUpdated = isset($_GET['updated']);
+$flashError = isset($_GET['error']);
+$editId = sanitize_field($_GET['edit'] ?? '');
+$editing = $editId !== '' ? get_submission_by_id($editId) : null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -118,6 +174,69 @@ $flashDeleted = isset($_GET['deleted']);
   <main class="admin-main container">
     <?php if ($flashDeleted): ?>
     <p class="form-status success admin-flash">Application deleted successfully.</p>
+    <?php endif; ?>
+    <?php if ($flashUpdated): ?>
+    <p class="form-status success admin-flash">Member details updated successfully.</p>
+    <?php endif; ?>
+    <?php if ($flashError): ?>
+    <p class="form-status error admin-flash">Could not complete that action. Please try again.</p>
+    <?php endif; ?>
+
+    <?php if ($editing !== null): ?>
+    <section class="admin-section admin-edit-section">
+      <div class="admin-edit-header">
+        <h2>Edit Member Details</h2>
+        <a class="btn btn-secondary btn-sm" href="index.php">Cancel</a>
+      </div>
+      <form class="admin-edit-form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo htmlspecialchars($editing['id']); ?>">
+        <div class="admin-edit-grid">
+          <div class="admin-edit-photo">
+            <img src="../<?php echo htmlspecialchars($editing['photo']); ?>" alt="<?php echo htmlspecialchars($editing['name']); ?>">
+            <div class="form-group">
+              <label for="edit-photo">Replace photo (optional)</label>
+              <input id="edit-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp">
+            </div>
+          </div>
+          <div class="admin-edit-fields">
+            <div class="form-group">
+              <label for="edit-name">Full name</label>
+              <input id="edit-name" name="name" type="text" value="<?php echo htmlspecialchars($editing['name']); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-student-id">Student ID</label>
+              <input id="edit-student-id" name="student_id" type="text" value="<?php echo htmlspecialchars($editing['student_id']); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-department">Department</label>
+              <input id="edit-department" name="department" type="text" value="<?php echo htmlspecialchars($editing['department']); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-track">Track</label>
+              <input id="edit-track" name="track" type="text" value="<?php echo htmlspecialchars($editing['track']); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-email">Email</label>
+              <input id="edit-email" name="email" type="email" value="<?php echo htmlspecialchars($editing['email']); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-designation">Designation</label>
+              <input id="edit-designation" name="designation" type="text" value="<?php echo htmlspecialchars($editing['designation'] ?? 'Member'); ?>" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-message">Message</label>
+              <textarea id="edit-message" name="message" rows="3"><?php echo htmlspecialchars($editing['message'] ?? ''); ?></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="admin-edit-actions">
+          <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+          <a class="btn btn-secondary" href="index.php">Cancel</a>
+        </div>
+      </form>
+    </section>
+    <?php elseif ($editId !== ''): ?>
+    <p class="form-status error admin-flash">That application could not be found.</p>
     <?php endif; ?>
 
     <div class="admin-stats">
