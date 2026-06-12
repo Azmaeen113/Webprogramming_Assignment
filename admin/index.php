@@ -50,6 +50,12 @@ if (!empty($_SESSION['admin_logged_in']) && $_SERVER['REQUEST_METHOD'] === 'POST
         ]);
     }
 
+    if ($action === 'delete') {
+        delete_submission($id);
+        header('Location: index.php?deleted=1');
+        exit;
+    }
+
     header('Location: index.php');
     exit;
 }
@@ -62,6 +68,8 @@ usort($submissions, static function (array $a, array $b): int {
 $pending = array_values(array_filter($submissions, static fn(array $item): bool => ($item['status'] ?? '') === 'pending'));
 $approved = array_values(array_filter($submissions, static fn(array $item): bool => ($item['status'] ?? '') === 'approved'));
 $rejected = array_values(array_filter($submissions, static fn(array $item): bool => ($item['status'] ?? '') === 'rejected'));
+
+$flashDeleted = isset($_GET['deleted']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +116,10 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
   </header>
 
   <main class="admin-main container">
+    <?php if ($flashDeleted): ?>
+    <p class="form-status success admin-flash">Application deleted successfully.</p>
+    <?php endif; ?>
+
     <div class="admin-stats">
       <div class="admin-stat-card">
         <span class="admin-stat-num"><?php echo count($pending); ?></span>
@@ -153,6 +165,7 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
             <div class="admin-action-buttons">
               <button type="submit" name="action" value="approve" class="btn btn-primary">Approve</button>
               <button type="submit" name="action" value="reject" class="btn btn-secondary">Reject</button>
+              <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Delete this application permanently?');">Delete</button>
             </div>
           </form>
         </article>
@@ -175,6 +188,7 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
               <th>Department</th>
               <th>Track</th>
               <th>Approved</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -185,6 +199,13 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
               <td><?php echo htmlspecialchars($submission['department']); ?></td>
               <td><?php echo htmlspecialchars($submission['track']); ?></td>
               <td><?php echo htmlspecialchars($submission['approved_at'] ?? ''); ?></td>
+              <td class="admin-row-actions">
+                <a class="btn btn-secondary btn-sm" href="index.php?edit=<?php echo urlencode($submission['id']); ?>">Edit</a>
+                <form method="post" class="admin-inline-form" onsubmit="return confirm('Delete this member permanently?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($submission['id']); ?>">
+                  <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
@@ -203,6 +224,7 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
               <th>Name</th>
               <th>Email</th>
               <th>Rejected</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -211,6 +233,13 @@ $rejected = array_values(array_filter($submissions, static fn(array $item): bool
               <td><?php echo htmlspecialchars($submission['name']); ?></td>
               <td><?php echo htmlspecialchars($submission['email']); ?></td>
               <td><?php echo htmlspecialchars($submission['rejected_at'] ?? ''); ?></td>
+              <td class="admin-row-actions">
+                <a class="btn btn-secondary btn-sm" href="index.php?edit=<?php echo urlencode($submission['id']); ?>">Edit</a>
+                <form method="post" class="admin-inline-form" onsubmit="return confirm('Delete this application permanently?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($submission['id']); ?>">
+                  <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
